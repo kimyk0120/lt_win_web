@@ -3,8 +3,8 @@ import Main from "./component/Main.jsx";
 
 function App() {
     return (
-   <Main></Main>
-  )
+        <Main></Main>
+    )
 }
 
 export default App
