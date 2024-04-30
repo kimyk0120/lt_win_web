@@ -1,17 +1,22 @@
-import "./Main.css";
+/* eslint-disable */
+import "./Home.css";
+import Button from '@mui/material/Button';
+import {Typography} from "@mui/material";
 
-function Main() {
+function Home() {
 
     const getLtHandler = () => {
         console.log("test");
     }
 
+    const title = "Hello World!";
+
     return (
         <>
             <div id="container">
-                <div className="item title_area">
-                    <h1>Hello World</h1>
-                </div>
+                <Typography variant="h4" className="item">
+                    {title}
+                </Typography>
                 <div className="item lt-ball-area">
                     <div className="lotto-ball mg5p">
                         <span className="number">23</span>
@@ -32,10 +37,21 @@ function Main() {
                         <span className="number">23</span>
                     </div>
                 </div>
-                <div className="item button-area">
-                    <button onClick={getLtHandler}>
-                        ROLL
-                    </button>
+                <div className="item">
+
+                    <Button variant="outlined"
+                            size="large"
+                            color="primary"
+                            style={{
+                                backgroundColor: '#090908',
+                                borderRadius: '10%',
+                                borderStyle: 'solid',
+                                fontSize: '20px',
+                                fontWeight: 'bold',
+                            }}
+                    >
+                        GET
+                    </Button>
                 </div>
             </div>
         </>
@@ -43,5 +59,5 @@ function Main() {
 }
 
 
-export default Main
+export default Home
 

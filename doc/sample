@@ -1,0 +1,29 @@
+ 1~10번까지는 노란색, 11~20번은 파란색, 21~30번은 빨간색, 31~40번은 회색, 41~45번은 녹색으로 구분
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  var ball = document.querySelector("#lotto-ball");
+  var number = document.querySelector("#number");
+
+  function setBallGradient(num) {
+    if (num >= 1 && num <= 10) {
+      return "radial-gradient(circle at 30% 30%, #FFFF00 0%, #B3B300 70%, #666600 100%)"; // 노란색
+    } else if (num >= 11 && num <= 20) {
+      return "radial-gradient(circle at 30% 30%, #0000FF 0%, #0000B3 70%, #000066 100%)"; // 파란색
+    } else if (num >= 21 && num <= 30) {
+      return "radial-gradient(circle at 30% 30%, #FF0000 0%, #B30000 70%, #660000 100%)"; // 빨간색
+    } else if (num >= 31 && num <= 40) {
+      return "radial-gradient(circle at 30% 30%, #808080 0%, #505050 70%, #303030 100%)"; // 회색
+    } else if (num >= 41 && num <= 45) {
+      return "radial-gradient(circle at 30% 30%, #008000 0%, #004D00 70%, #002600 100%)"; // 녹색
+    } else {
+      return "white"; // 기본색상
+    }
+  }
+
+  number.addEventListener("change", function() {
+    var num = parseInt(this.textContent, 10);  // 숫자를 가져옵니다
+    var gradient = setBallGradient(num);  // 그라디언트 설정
+    ball.style.background = gradient;  // 배경 그라디언트 변경
+  });
+});

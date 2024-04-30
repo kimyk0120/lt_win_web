@@ -10,7 +10,7 @@
 }
 
 
-.item{
+.item {
     flex: 1 1 auto;
     padding: 20px;
     margin: 10px;
@@ -18,7 +18,7 @@
     text-align: center;
 }
 
-.lt-ball-area{
+.lt-ball-area {
     flex: 1 1 auto;
     display: flex;
     flex-wrap: wrap;
@@ -27,9 +27,9 @@
 }
 
 .lotto-ball {
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle at 30% 30%, #ff0000 0%, #b30000 70%, #660000 100%);
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at 30% 30%, #FFFF00 0%, #B3B300 70%, #666600 100%);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -40,11 +40,30 @@
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* This adds a small shadow */
 }
 
-.mg5p{
+/*#lotto-ball {*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*    border-radius: 50%;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    color: white;*/
+/*    font-size: 2rem;*/
+/*    font-weight: bold;*/
+/*}*/
+
+.mg5p {
     margin: 5px;
 }
 
 .number {
     display: inline-block;
+}
+
+.roll-btn {
+    font-size: 1.2em;
+    /*font-weight: bolder;*/
+    /*border-radius: 10%;*/
+    /*background-color: #090908;*/
 }
 
