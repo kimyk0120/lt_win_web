@@ -22,9 +22,14 @@ function Home() {
                 numbers.push(randomNum);
             }
         }
+
+        numbers.sort((a, b) => a - b);
         setBallNums(numbers);
     };
 
+    /**
+     *   render ball
+     */
     function renderBall(n, i, color) {
 
         const direction = rotationDirections[i] === 'clockwise' ? 'spin-clockwise' : 'spin-counter-clockwise';
@@ -42,21 +47,25 @@ function Home() {
 
     useEffect(() => {
         getRandomNumbers();
+        setSpeedAndDirection();
     }, []);
 
 
-    const getLtHandler = () => {
-        getRandomNumbers();
-
+    function setSpeedAndDirection() {
         const speeds = [];
         const directions = [];
-        for(let i = 0; i < 6; i++) {
+        for (let i = 0; i < 6; i++) {
             speeds.push(Math.random() * 2 + 0.3); // random speed between 0.3s and 2.3s
             directions.push(Math.random() < 0.5 ? 'clockwise' : 'counter-clockwise'); // random direction
         }
         setRotate(prev => prev + 1);
         setRotationSpeeds(speeds);
         setRotationDirections(directions);
+    }
+
+    const getLtHandler = () => {
+        getRandomNumbers();
+        setSpeedAndDirection();
     }
 
     const title = "Hello World!";
@@ -100,7 +109,7 @@ function Home() {
                             }}
                             onClick={getLtHandler}
                     >
-                        GET
+                        ROLL
                     </Button>
                 </div>
             </div>
