@@ -26,10 +26,6 @@ function Home() {
 
         numbers.sort((a, b) => a - b);
         setBallNums(numbers);
-        setBallNumHistory([
-            ballNums.toString(),
-            ...ballNumHistory
-        ])
     };
 
     /**
@@ -68,9 +64,17 @@ function Home() {
         setRotationDirections(directions);
     }
 
+    function setupBallNumHistory() {
+        setBallNumHistory([
+            ballNums.toString(),
+            ...ballNumHistory
+        ])
+    }
+
     const getLtHandler = () => {
         getRandomNumbers();
         setSpeedAndDirection();
+        setupBallNumHistory();
     }
 
     const title = "Hello World!";
