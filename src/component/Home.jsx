@@ -2,11 +2,35 @@
 import "./Home.css";
 import Button from '@mui/material/Button';
 import {Typography} from "@mui/material";
+import {useEffect, useState} from "react";
 
 function Home() {
 
+    const [ballNums, setBallNums] = useState([0, 0, 0, 0, 0, 0]);
+
+    /**
+     *    get random 6 numbers
+     */
+    const getRandomNumbers = () => {
+        const numbers = [];
+        while (numbers.length < 6) {
+            const randomNum = Math.floor(Math.random() * 45) + 1;
+            if (!numbers.includes(randomNum)) {
+                numbers.push(randomNum);
+            }
+        }
+        setBallNums(numbers);
+    };
+
+
+
+    useEffect(() => {
+        getRandomNumbers();
+    }, []);
+
+
     const getLtHandler = () => {
-        console.log("test");
+        getRandomNumbers();
     }
 
     const title = "Hello World!";
@@ -18,24 +42,23 @@ function Home() {
                     {title}
                 </Typography>
                 <div className="item lt-ball-area">
-                    <div className="lotto-ball mg5p">
-                        <span className="number">23</span>
-                    </div>
-                    <div className="lotto-ball mg5p">
-                        <span className="number">23</span>
-                    </div>
-                    <div className="lotto-ball mg5p">
-                        <span className="number">23</span>
-                    </div>
-                    <div className="lotto-ball mg5p">
-                        <span className="number">23</span>
-                    </div>
-                    <div className="lotto-ball mg5p">
-                        <span className="number">23</span>
-                    </div>
-                    <div className="lotto-ball mg5p">
-                        <span className="number">23</span>
-                    </div>
+                    {
+                        ballNums.map((n, i) => {
+                            if (n <= 10) {
+                                return renderBall(n, i, 'bbg-yellow');
+                            } else if (n <= 20) {
+                                return renderBall(n, i, 'bbg-blue');
+                            }else if (n <= 30) {
+                                return renderBall(n, i, 'bbg-red');
+                            }else if (n <= 40) {
+                                return renderBall(n, i, 'bbg-gray');
+                            } else if(n<=45){
+                                return renderBall(n, i, 'bbg-green');
+                            } else {
+                                return renderBall(n, i, 'bbg-white');
+                            }
+                        })
+                    }
                 </div>
                 <div className="item">
 
@@ -49,12 +72,21 @@ function Home() {
                                 fontSize: '20px',
                                 fontWeight: 'bold',
                             }}
+                            onClick={getLtHandler}
                     >
                         GET
                     </Button>
                 </div>
             </div>
         </>
+    )
+}
+
+function renderBall(n, i, color) {
+    return (
+        <div className={`lotto-ball mg5p ${color}`} key={i}>
+            <span className="number">{n}</span>
+        </div>
     )
 }
 
