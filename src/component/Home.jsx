@@ -6,7 +6,8 @@ import {useEffect, useState} from "react";
 
 function Home() {
 
-    const [ballNums, setBallNums] = useState([0, 0, 0, 0, 0, 0]);
+    const [ballNums, setBallNums] = useState([]);
+    const [ballNumHistory, setBallNumHistory] = useState([]);
     const [rotate, setRotate] = useState(false);
     const [rotationSpeeds, setRotationSpeeds] = useState([]);
     const [rotationDirections, setRotationDirections] = useState([]);
@@ -25,6 +26,10 @@ function Home() {
 
         numbers.sort((a, b) => a - b);
         setBallNums(numbers);
+        setBallNumHistory([
+            ballNums.toString(),
+            ...ballNumHistory
+        ])
     };
 
     /**
@@ -95,7 +100,7 @@ function Home() {
                         })
                     }
                 </div>
-                <div className="item">
+                <div className="item button-area">
 
                     <Button variant="outlined"
                             size="large"
@@ -112,6 +117,19 @@ function Home() {
                         ROLL
                     </Button>
                 </div>
+
+                <div className="item hisroty" >
+                    {
+                        ballNumHistory.map((n, i) => {
+                            return (
+                                <div className="history-item" key={i}>
+                                    <span>{n}</span>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+
             </div>
         </>
     )
