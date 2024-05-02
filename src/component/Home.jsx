@@ -7,6 +7,9 @@ import {useEffect, useState} from "react";
 function Home() {
 
     const [ballNums, setBallNums] = useState([0, 0, 0, 0, 0, 0]);
+    const [rotate, setRotate] = useState(false);
+    const [rotationSpeeds, setRotationSpeeds] = useState([]);
+    const [rotationDirections, setRotationDirections] = useState([]);
 
     /**
      *    get random 6 numbers
@@ -22,7 +25,20 @@ function Home() {
         setBallNums(numbers);
     };
 
+    function renderBall(n, i, color) {
 
+        const direction = rotationDirections[i] === 'clockwise' ? 'spin-clockwise' : 'spin-counter-clockwise';
+        return (
+            <div className={`lotto-ball mg5p ball ${rotate ? 'rotate' : ''} ${color}`}
+                 onAnimationEnd={() => setRotate(0)}
+                 style={{
+                     animation: `${direction} ${rotationSpeeds[i]}s linear`
+                 }}
+                 key={i}>
+                <span className="number">{n}</span>
+            </div>
+        )
+    }
 
     useEffect(() => {
         getRandomNumbers();
@@ -31,6 +47,16 @@ function Home() {
 
     const getLtHandler = () => {
         getRandomNumbers();
+
+        const speeds = [];
+        const directions = [];
+        for(let i = 0; i < 6; i++) {
+            speeds.push(Math.random() * 2 + 0.3); // random speed between 0.3s and 2.3s
+            directions.push(Math.random() < 0.5 ? 'clockwise' : 'counter-clockwise'); // random direction
+        }
+        setRotate(prev => prev + 1);
+        setRotationSpeeds(speeds);
+        setRotationDirections(directions);
     }
 
     const title = "Hello World!";
@@ -48,11 +74,11 @@ function Home() {
                                 return renderBall(n, i, 'bbg-yellow');
                             } else if (n <= 20) {
                                 return renderBall(n, i, 'bbg-blue');
-                            }else if (n <= 30) {
+                            } else if (n <= 30) {
                                 return renderBall(n, i, 'bbg-red');
-                            }else if (n <= 40) {
+                            } else if (n <= 40) {
                                 return renderBall(n, i, 'bbg-gray');
-                            } else if(n<=45){
+                            } else if (n <= 45) {
                                 return renderBall(n, i, 'bbg-green');
                             } else {
                                 return renderBall(n, i, 'bbg-white');
@@ -79,14 +105,6 @@ function Home() {
                 </div>
             </div>
         </>
-    )
-}
-
-function renderBall(n, i, color) {
-    return (
-        <div className={`lotto-ball mg5p ${color}`} key={i}>
-            <span className="number">{n}</span>
-        </div>
     )
 }
 
