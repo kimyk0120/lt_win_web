@@ -106,6 +106,12 @@
 .history-item{
     color: #b5b4b4;
     border: white;
-    box-shadow: 2px 2px 10px rgba(159, 134, 134, 0.2);
+    box-shadow: 0px 2px 10px rgba(159, 134, 134, 0.2);
+    padding: 2px;
 }
 
+.history-container {
+    max-height: 250px; /*Change this value according to your requirements*/
+    overflow-y: auto;
+    min-height: 250px;
+}

@@ -65,6 +65,12 @@ function Home() {
     }
 
     function setupBallNumHistory() {
+
+        // it over 5 remove one
+        if (ballNumHistory.length >= 5) {
+            ballNumHistory.pop();
+        }
+
         setBallNumHistory([
             ballNums.toString(),
             ...ballNumHistory
@@ -122,7 +128,7 @@ function Home() {
                     </Button>
                 </div>
 
-                <div className="item hisroty" >
+                <div className="item history-container" >
                     {
                         ballNumHistory.map((n, i) => {
                             return (
