@@ -3,6 +3,8 @@ import "./Home.css";
 import Button from '@mui/material/Button';
 import {Typography} from "@mui/material";
 import {useEffect, useState} from "react";
+import LottoBall from "./LottoBall.jsx";
+import RollButton from "./RollButton.jsx";
 
 function Home() {
 
@@ -35,14 +37,16 @@ function Home() {
 
         const direction = rotationDirections[i] === 'clockwise' ? 'spin-clockwise' : 'spin-counter-clockwise';
         return (
-            <div className={`lotto-ball mg5p ball ${rotate ? 'rotate' : ''} ${color}`}
-                 onAnimationEnd={() => setRotate(0)}
-                 style={{
-                     animation: `${direction} ${rotationSpeeds[i]}s linear`
-                 }}
-                 key={i}>
-                <span className="number">{n}</span>
-            </div>
+            <LottoBall
+                rotate={rotate}
+                color={color}
+                setRotate={setRotate}
+                direction={direction}
+                rotationSpeeds={rotationSpeeds}
+                index={i}
+                number={n}
+                key={i}
+            ></LottoBall>
         )
     }
 
@@ -111,24 +115,10 @@ function Home() {
                     }
                 </div>
                 <div className="item button-area">
-
-                    <Button variant="outlined"
-                            size="large"
-                            color="primary"
-                            style={{
-                                backgroundColor: '#090908',
-                                borderRadius: '10%',
-                                borderStyle: 'solid',
-                                fontSize: '20px',
-                                fontWeight: 'bold',
-                            }}
-                            onClick={getLtHandler}
-                    >
-                        ROLL
-                    </Button>
+                    <RollButton getLtHandler={getLtHandler} />
                 </div>
 
-                <div className="item history-container" >
+                <div className="item history-container">
                     {
                         ballNumHistory.map((n, i) => {
                             return (
