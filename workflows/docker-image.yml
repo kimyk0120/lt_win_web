@@ -1,0 +1,47 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag isob-api:$(date +%s)
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:   
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: kimyk0120/isob-api:latest
+
+    - name: Docker Run
+      uses: appleboy/ssh-action@master
+      env:
+        APP: "isob-api"
+        COMPOSE: ${{ secrets.DOCKERCOMPOSE_PATH }}
+      with:
+        username: ubuntu
+        host: ${{ secrets.HOST }}
+        key: ${{ secrets.SSH_KEY }}
+        envs: APP, COMPOSE
+        script_stop: true
+        script: |
+          sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }} &&
+          sudo docker compose -f $COMPOSE pull &&
+          sudo docker compose -f $COMPOSE up -d && 
+          sudo docker image prune -f
