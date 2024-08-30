@@ -14,7 +14,6 @@ This application uses the following tools:
 >GitHub Action  
 >Docker
 
-DEMO : http://152.69.235.96:5173/
 
 <img src="./screenshot/ltwin_web.png" style="width: 480px; height: auto;" alt="ltwin_web">
 
